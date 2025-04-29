@@ -1,2 +1,2 @@
-# exemplo-crud-poo
-exemplo crud com orientação objeto
+# Exemplo CRUD PHP refatorado com Orientação a Objetos
+
