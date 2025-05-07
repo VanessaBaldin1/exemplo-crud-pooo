@@ -6,6 +6,7 @@ use PDO; // para usar apaga uma palavra do PDO e preenche novamente vai dar o us
 use Throwable;
 
 use ExemploCrud\Database\ConexaoBD; //precisa se atentar com a pasta que esta o ConexaoBD
+use ExemploCrud\Models\Fabricante;
 
 final class FabricanteServico{
   
@@ -16,7 +17,7 @@ final class FabricanteServico{
     $this->conexao = ConexaoBD::getConexao(); //acessando um recurso da classe não é herança
   }
 
-  public function listarTodos():array {
+   public function listarTodos():array {
     $sql = "SELECT * FROM fabricantes ORDER BY nome";
     
     try {
@@ -35,6 +36,26 @@ final class FabricanteServico{
     }
   }
   
+   public function inserir(Fabricante $fabricante): void
+   {
+    $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
+
+    try {
+      $consulta = $this->conexao->prepare($sql);
+      $consulta->bindValue(":nome", $fabricante->getNome(), PDO::PARAM_STR);
+      $consulta->execute();
+    } catch (Throwable $erro) {
+      throw new Exception("Erro ao inserir: " .$erro->getMessage());
+    }
+    
+
+
+
+
+
+
+
+   }
 
 
 
