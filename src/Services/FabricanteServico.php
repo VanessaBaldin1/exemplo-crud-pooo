@@ -5,7 +5,7 @@ use Exception;
 use PDO; // para usar apaga uma palavra do PDO e preenche novamente vai dar o use só selecionar
 use Throwable;
 
-use ExemploCrud\ConexaoBD; // esse use é nosso
+use ExemploCrud\Database\ConexaoBD; //precisa se atentar com a pasta que esta o ConexaoBD
 
 final class FabricanteServico{
   

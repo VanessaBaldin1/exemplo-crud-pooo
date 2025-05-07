@@ -1,12 +1,11 @@
-<?php 
+<?php
 
-/*Acessando as funções de fabricantes */
-require_once "../src/funcoes-fabricantes.php";
+use ExemploCrud\Services\FabricanteServico;
 
-/* Chamando a função responsável por carregar os dados dos fabricantes*/
-$listaDeFabricantes = listarFabricantes($conexao);
+require_once "../vendor/autoload.php";
 
-/*Contando os elementos/registros */
+$fabricanteServico = new FabricanteServico();
+$listaDeFabricantes = $fabricanteServico->listarTodos();
 $quantidade = count($listaDeFabricantes);
 
 ?>
