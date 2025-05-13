@@ -62,15 +62,16 @@ final class FabricanteServico
       //Usar somente Fetch para chamar um só linha de registro, não todos como estava antes fetchAll (chama todos os registros constam na tabela)
       //Usamos o fetch para garantir o retorno de um único array associativo com o resultado
       
-
-      //Gruardamos o resultado da operação fetch em uma variável
-      $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+      //Duas formas - refatora return
+      // 1 Gruardamos o resultado da operação fetch em uma variável
+      // 1 $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
       
-      //Se o resultado for verdadeiro, retornamos ele. Senão, retornamos null
-      return $resultado ? $resultado : null;
+      // 1 Se o resultado for verdadeiro, retornamos ele. Senão, retornamos null
+      // 1 return $resultado ? $resultado : null;
 
-
-      //return $consulta->fetch(PDO::FETCH_ASSOC);
+      // 2Versão usando ternário simplificado usando 'elvis operator'
+      return $consulta->fetch(PDO::FETCH_ASSOC) ?: null;
+      
     } catch (Throwable $erro) {
       throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
     }
