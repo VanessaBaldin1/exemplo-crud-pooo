@@ -24,8 +24,17 @@ if (isset($_POST['atualizar'])) {
     $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
 
     /* Exercício! Implemente a função para atualizar o nome do fabricante */
-    atualizarFabricante($conexao, $id, $nome);
+    //atualizarFabricante($conexao, $id, $nome);
 
+    //criar um objeto chamado fabricante - modelo não é servico
+
+    $fabricante = new Fabricante($nome, $id);
+
+    //pra teste se esta funcionando
+    //Utils::dump($fabricante);
+    //die(); //parar
+
+    $fabricanteServico->atualizar($fabricante);
 
     header("location:visualizar.php");
     exit;

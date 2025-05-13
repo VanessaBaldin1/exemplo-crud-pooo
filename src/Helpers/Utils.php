@@ -9,7 +9,9 @@ final class Utils{
     private function __construct() { }
 
     public static function dump(mixed $dados):void {
-       echo "<pre>".var_dump($dados)."</pre>";
+       echo "<pre>";
+       var_dump($dados);
+       echo "</pre>";
 
     }
    
