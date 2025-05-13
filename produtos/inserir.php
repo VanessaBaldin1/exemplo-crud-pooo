@@ -1,8 +1,14 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
-require_once "../src/funcoes-produtos.php";
 
-$listaDeFabricantes = listarFabricantes($conexao);
+use ExemploCrud\Models\Produto;
+use ExemploCrud\Services\ProdutoServico;
+use ExemploCrud\Services\ProdutoServicoServico;
+
+require_once "../vendor/autoload.php";
+
+$produtoServico = new ProdutoServico();
+$listaDeProdutos = $produtoServico->listarTodos();
+
 
 if(isset($_POST["inserir"])){
     //capturar os dados do formulário
@@ -15,7 +21,10 @@ if(isset($_POST["inserir"])){
     $idfabricante = filter_input(INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT);
     $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    inserirProduto($conexao, $nome, $preco, $quantidade, $idfabricante, $descricao);
+    //inserirProduto($conexao, $nome, $preco, $quantidade, $idfabricante, $descricao);
+
+   $produto = new Produto($nome, $preco, $quantidade, $idfabricante,$descricao );
+   $produtoServico->inserir($produto);
 
     //Por fim, redirecionar para visualização dos produtos
 

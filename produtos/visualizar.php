@@ -1,8 +1,18 @@
-<?php 
-require_once"../src/funcoes-produtos.php";
-require_once"../src/funcoes-utilitarias.php";
+<?php
 
-$listaDeProdutos = listarProdutos($conexao);
+use ExemploCrud\Helpers\Utils;
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../src/funcoes-utilitarias.php";
+require_once "../vendor/autoload.php";
+
+
+
+$produtoServico = new ProdutoServico();
+$listaDeProdutos = $produtoServico->listarTodos();
+
+//Utils::dump($listaDeProdutos);
+//die();
 
 $quantidade = count($listaDeProdutos);
 
@@ -39,9 +49,9 @@ $quantidade = count($listaDeProdutos);
                     <h3><?=$produto["produto"]?></h3>
                     <h4><?=$produto["fabricante"]?></h4>
                     <!-- inclui formatarPreco da pagina de função utilitaria.php, formar de chamar a função é diferente -->
-                    <p><b>Preço: <?=formatarPreco($produto["preco"])?> </b> </p>
+                    <p><b>Preço: <?=Utils::formatarPreco($produto["preco"])?> </b> </p>
                     <p><b>Quantidade: <?=$produto["quantidade"]?> </b></p>
-                    <p><b>Total:</b> <?=formatarPreco($produto["preco"] * $produto["quantidade"])?> </p>
+                    <p><b>Total:</b> <?=Utils::formatarPreco(($produto["preco"] * $produto["quantidade"]))?> </p>
 
                     <!-- Incluindo Link dinâmico -->
                     <a class="btn btn-warning btn-sm" href="atualizar.php?id=<?=$produto['id']?>">Atualizar produto</a>
