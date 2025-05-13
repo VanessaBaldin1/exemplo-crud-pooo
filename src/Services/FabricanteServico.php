@@ -61,45 +61,48 @@ final class FabricanteServico
       $consulta->execute();
       //Usar somente Fetch para chamar um só linha de registro, não todos como estava antes fetchAll (chama todos os registros constam na tabela)
       //Usamos o fetch para garantir o retorno de um único array associativo com o resultado
-      
+
       //Duas formas - refatora return
       // 1 Gruardamos o resultado da operação fetch em uma variável
       // 1 $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-      
+
       // 1 Se o resultado for verdadeiro, retornamos ele. Senão, retornamos null
       // 1 return $resultado ? $resultado : null;
 
       // 2Versão usando ternário simplificado usando 'elvis operator'
       return $consulta->fetch(PDO::FETCH_ASSOC) ?: null;
-      
     } catch (Throwable $erro) {
       throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
     }
-
   }
 
-  public function atualizar(Fabricante $fabricante):void {
+  public function atualizar(Fabricante $fabricante): void
+  {
 
     $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
 
     try {
-    
+
       $consulta = $this->conexao->prepare($sql);
       $consulta->bindValue(":id", $fabricante->getId(), PDO::PARAM_INT);
       $consulta->bindValue(":nome", $fabricante->getNome(), PDO::PARAM_STR);
       $consulta->execute();
-
-
     } catch (Throwable $erro) {
-      throw new Exception("Erro ao carregar fabricante: ".$erro->getMessage());
+      throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
     }
+}
 
+    public function excluir(int $id): void
+    {
+      $sql = "DELETE FROM fabricantes WHERE id = :id";
 
-
-  }
-
-
-
-
-
+      try {
+        $consulta = $this->conexao->prepare($sql);
+        $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+        $consulta->execute();
+      } catch (Throwable $erro) {
+        throw new Exception("Erro ao carregar fabricante: " . $erro->getMessage());
+      }
+    }
+  
 }
