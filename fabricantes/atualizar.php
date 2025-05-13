@@ -1,5 +1,6 @@
 <?php
 
+use ExemploCrud\Helpers\Utils;
 use ExemploCrud\Models\Fabricante;
 use ExemploCrud\Services\FabricanteServico;
 
@@ -13,9 +14,9 @@ $fabricanteServico = new FabricanteServico();
 $fabricanteDados = $fabricanteServico->buscarPorId($id);
 
 //validacao de visualizar o array associativo e null
-//echo "<pre>";
-//var_dump($fabricanteDados);
-//echo "</pre>";
+
+Utils::dump($fabricanteDados);
+
 
 //Verificando se o formulário de atualização foi acionado
 
