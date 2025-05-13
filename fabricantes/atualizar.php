@@ -15,7 +15,7 @@ $fabricanteDados = $fabricanteServico->buscarPorId($id);
 
 //validacao de visualizar o array associativo e null
 
-Utils::dump($fabricanteDados);
+//Utils::dump($fabricanteDados);
 
 
 //Verificando se o formulário de atualização foi acionado
@@ -54,13 +54,13 @@ if (isset($_POST['atualizar'])) {
         <form action="" method="post" class="w-25">
             <!-- Campo oculto (hidden): o formulário/servidor "sabe"do valor, mas não mostra para o usuário -->
 
-            <input type="hidden" name="id" value="<?=$fabricante['nome']?>">
+            <input type="hidden" name="id" value="<?=$fabricanteDados['id']?>">
 
             <div class="mb-3">
 
                 <label for="nome" class="form-label">Nome:</label>
                 <!-- Para aparecer o nome do fabricante incluir depois do input VALUE com php -->
-                <input value="<?=$fabricante['nome']?>"
+                <input value="<?=$fabricanteDados['nome']?>"
                  class="form-control" required type="text" name="nome" id="nome">
             </div>
             <button class="btn btn-warning" type="submit" name="atualizar">
