@@ -78,6 +78,26 @@ final class FabricanteServico
 
   }
 
+  public function atualizar(Fabricante $fabricante):void {
+
+    $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id";
+
+    try {
+    
+      $consulta = $this->conexao->prepare($sql);
+      $consulta->bindValue(":id", $fabricante->getId(), PDO::PARAM_INT);
+      $consulta->bindValue(":nome", $fabricante->getNome(), PDO::PARAM_STR);
+      $consulta->execute();
+
+
+    } catch (Throwable $erro) {
+      throw new Exception("Erro ao carregar fabricante: ".$erro->getMessage());
+    }
+
+
+
+  }
+
 
 
 
