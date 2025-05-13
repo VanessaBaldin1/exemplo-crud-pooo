@@ -1,11 +1,21 @@
 <?php
-require_once "../src/funcoes-fabricantes.php";
+
+use ExemploCrud\Models\Fabricante;
+use ExemploCrud\Services\FabricanteServico;
+
+require_once "../vendor/autoload.php";
 
 /* Obtendo o valor do parâmetro via URL - links dinâmico*/
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 /* Chamando a função para carregar os dados de um fabricante */
-$fabricante = listarUmFabricante($conexao, $id);
+$fabricanteServico = new FabricanteServico();
+$fabricanteDados = $fabricanteServico->buscarPorId($id);
+
+//validacao de visualizar o array associativo e null
+//echo "<pre>";
+//var_dump($fabricanteDados);
+//echo "</pre>";
 
 //Verificando se o formulário de atualização foi acionado
 
