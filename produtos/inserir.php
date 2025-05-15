@@ -1,10 +1,15 @@
 <?php
 
+use ExemploCrud\Helpers\Utils;
 use ExemploCrud\Models\Produto;
 use ExemploCrud\Services\ProdutoServico;
-use ExemploCrud\Services\ProdutoServicoServico;
+use ExemploCrud\Services\FabricanteServico;
 
 require_once "../vendor/autoload.php";
+
+$fabricanteServico = new FabricanteServico();
+$listaDeFabricantes = $fabricanteServico->listarTodos();
+
 
 $produtoServico = new ProdutoServico();
 $listaDeProdutos = $produtoServico->listarTodos();
@@ -13,7 +18,7 @@ $listaDeProdutos = $produtoServico->listarTodos();
 if(isset($_POST["inserir"])){
     //capturar os dados do formulário
    //chamar a função responsável por inserir o produto e passar os parametros
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
     $preco = filter_input(INPUT_POST, "preco", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $quantidade = filter_input(INPUT_POST, "quantidade", FILTER_SANITIZE_NUMBER_INT);
 
@@ -22,8 +27,11 @@ if(isset($_POST["inserir"])){
     $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     //inserirProduto($conexao, $nome, $preco, $quantidade, $idfabricante, $descricao);
-
-   $produto = new Produto($nome, $preco, $quantidade, $idfabricante,$descricao );
+    //Utils::dump($idfabricante);
+    //die();
+   $produto = new Produto($nome, $preco, $quantidade, $idfabricante, $descricao);
+//    Utils::dump($produto);
+//    die();
    $produtoServico->inserir($produto);
 
     //Por fim, redirecionar para visualização dos produtos

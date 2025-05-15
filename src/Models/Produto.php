@@ -5,21 +5,21 @@ namespace ExemploCrud\Models;
 use InvalidArgumentException;
 
 final class Produto
-{
-    private ?int $id;
+{   
     private string $nome;
-    private ?string $descricao;
     private float $preco;
     private int $quantidade;
     private int $fabricanteId;
+    private ?string $descricao;
+    private ?int $id;
 
     public function __construct(
         string $nome,
         float $preco,
         int $quantidade,
         int $fabricanteId,
-        ?int $id = null,
-        ?string $descricao = null
+        ?string $descricao = null,
+        ?int $id = null
     ) {
 
         $this->setNome($nome);
