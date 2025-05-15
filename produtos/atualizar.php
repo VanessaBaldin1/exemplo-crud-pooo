@@ -1,16 +1,25 @@
 <?php
-require_once "../src/funcoes-produtos.php";
+use ExemploCrud\Helpers\Utils;
+use ExemploCrud\Models\Produto;
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../vendor/autoload.php";
 
 //fazer a conexão com a funções fabricantes para configurar a lista suspensa na pagina de visualizar.php/produtos
-require_once "../src/funcoes-fabricantes.php";
+use ExemploCrud\Services\FabricanteServico;
 //fazer a conexão com a lista de fabricantes para aparecer na lista suspensa junto com  produtos
-$listaDeFabricantes = listarFabricantes($conexao);
+$fabricanteServico = new FabricanteServico();
+$produtoServico = new ProdutoServico();
+
 
 /* Obtendo o valor do parâmetro via URL - links dinâmico*/
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 /* Chamando a função para carregar os dados de um produto */
-$produto = listarUmProduto($conexao, $id);
+$produto = $produtoServico->buscarPorId($id);
+
+$listaDeFabricantes = $fabricanteServico->listarTodos();
+
 
 //var_dump($produto);
 
@@ -26,7 +35,8 @@ if (isset($_POST['atualizar'])) {
 
 
     /* Exercício! Implemente a função para atualizar campos do produto */
-    atualizarProduto($conexao, $nome, $id, $preco, $quantidade, $descricao, $fabricante_id);
+    $produtoAtualizado = new Produto($nome, $preco, $quantidade, $fabricante_id,$descricao, $id);
+    $produtoServico->atualizar($produtoAtualizado);
 
 
     header("location:visualizar.php");
@@ -55,9 +65,10 @@ if (isset($_POST['atualizar'])) {
         <hr>
 
         <form action="" method="post" class="w-50">
+            <input type="hidden" name="id" value="<?=$produto['id']?>">
             <div class="mb-3">
                 <label class="form-label" for="nome">Nome:</label>
-                <input type="hidden" name="id" value="<?=$produto['nome']?>"    class="form-control" type="text" name="nome" id="nome" required>
+                <input type="text" name="id" value="<?=$produto['nome']?>" class="form-control" name="nome" id="nome" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="preco">Preço:</label>

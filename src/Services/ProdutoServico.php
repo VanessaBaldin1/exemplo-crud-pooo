@@ -92,10 +92,15 @@ final class ProdutoServico
     }
   }
 
+
+
+
+
+
   public function atualizar(Produto $produto): void
   {
 
-    $sql = "UPDATE produtos SET nome = :nome WHERE id = :id";
+    $sql = "UPDATE produtos SET nome = :nome, preco = :preco, quantidade = :quantidade, descricao = :descricao, fabricante_id = :fabricante_id WHERE id = :id";
 
     try {
 
