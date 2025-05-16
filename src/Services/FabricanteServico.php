@@ -7,6 +7,7 @@ use PDO; // para usar apaga uma palavra do PDO e preenche novamente vai dar o us
 use Throwable;
 
 use ExemploCrud\Database\ConexaoBD; //precisa se atentar com a pasta que esta o ConexaoBD
+use ExemploCrud\Helpers\Utils;
 use ExemploCrud\Models\Fabricante;
 
 final class FabricanteServico
@@ -21,7 +22,7 @@ final class FabricanteServico
 
   public function listarTodos(): array
   {
-    $sql = "SELECT * FROM fabricantes ORDER BY nome";
+    $sql = "SELECT * FROM fabricante ORDER BY nome";
 
     try {
       /* Preparando o comando SQL ANTES de executar no servidor e guardando em memória (variável consulta ou query) */
@@ -34,7 +35,8 @@ final class FabricanteServico
       /* "fetch All", Busca/Retorna todos os dados provenientes da execução da consulta e os transforma em um array associativo */
       return $consulta->fetchAll(PDO::FETCH_ASSOC);
     } catch (Throwable $erro) {
-      throw new Exception("Erro ao carregar fabricantes: " . $erro->getMessage());
+      Utils::registrarLog($erro);
+      throw new Exception("Erro ao carregar fabricantes: ");
     }
   }
 
