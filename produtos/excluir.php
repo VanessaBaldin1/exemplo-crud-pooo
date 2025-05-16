@@ -16,19 +16,12 @@ $produtoServico = new ProdutoServico();
 if(isset($_GET['id'])){
    $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
    $produtoServico->excluir($id);
-  
    
 }
 
  header("location:visualizar.php");
+
 ?>
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
