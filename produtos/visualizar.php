@@ -3,7 +3,7 @@
 use ExemploCrud\Helpers\Utils;
 use ExemploCrud\Services\ProdutoServico;
 
-require_once "../src/funcoes-utilitarias.php";
+
 require_once "../vendor/autoload.php";
 
 

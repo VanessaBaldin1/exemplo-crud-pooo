@@ -29,14 +29,17 @@ if (isset($_POST['atualizar'])) {
     $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
     $preco = filter_input(INPUT_POST,"preco", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $quantidade = filter_input(INPUT_POST, "quantidade", FILTER_SANITIZE_NUMBER_INT);
-    $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_SPECIAL_CHARS);
     $fabricante_id = filter_input(INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT);
+    $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_SPECIAL_CHARS);
+    $id = filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT);
+    
 
 
 
     /* Exercício! Implemente a função para atualizar campos do produto */
-    $produtoAtualizado = new Produto($nome, $preco, $quantidade, $fabricante_id,$descricao, $id);
-    $produtoServico->atualizar($produtoAtualizado);
+    $produto = new Produto($nome, $preco, $quantidade, $fabricante_id, $descricao, $id);
+    
+    $produtoServico->atualizar($produto);
 
 
     header("location:visualizar.php");
@@ -68,7 +71,7 @@ if (isset($_POST['atualizar'])) {
             <input type="hidden" name="id" value="<?=$produto['id']?>">
             <div class="mb-3">
                 <label class="form-label" for="nome">Nome:</label>
-                <input type="text" name="id" value="<?=$produto['nome']?>" class="form-control" name="nome" id="nome" required>
+                <input type="text" value="<?=$produto['nome']?>" class="form-control" name="nome" id="nome" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="preco">Preço:</label>
