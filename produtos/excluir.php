@@ -1,18 +1,26 @@
 <?php
 
 /*Acessando as funções de Produto */
-require_once "../src/funcoes-produtos.php";
+
+use ExemploCrud\Services\ProdutoServico;
+
+require_once "../vendor/autoload.php";
 
 /* Obtendo o valor do parâmetro via URL - links dinâmico*/
-$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+
+
+
+$produtoServico = new ProdutoServico();
 
 // verificando se houve o SIM para excluir
-if(isset($_GET['confirmar-exclusao'])){
-   excluirProduto($conexao, $id);
-   header("location:visualizar.php");
-   exit;
+if(isset($_GET['id'])){
+   $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+   $produtoServico->excluir($id);
+  
+   
 }
 
+ header("location:visualizar.php");
 ?>
 
 
